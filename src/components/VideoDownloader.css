@@ -1,0 +1,113 @@
+.video-downloader-container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f6f1f4;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%; /* Assure que le conteneur prend toute la largeur */
+    z-index: 1000; /* Assure que la barre est visible au-dessus des autres éléments */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    position: fixed; /* Correction: pas de guillemets */
+    top: 0;
+    z-index: 1000; /* Garde la barre visible au-dessus des autres éléments */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.about-btn {
+    background-color: #3d8f2d;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 50px; /* Ajoute un espacement à droite pour l'éloigner des bords */
+    margin-left: auto; /* S'assure que le bouton soit aligné à droite */
+}
+
+
+.page-title {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.download-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; /* Ajoute un espace sous la barre fixe */
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    background-color: #e0d4d4;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.form-input {
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    flex: 1;
+    background-color: #eae5e5;
+    margin-right: 10px;
+}
+
+.download-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+.separator {
+    width: 100%;
+    margin: 30px 0;
+}
+
+.downloaded-list-title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}
+
+.success-message {
+    color: green;
+    text-align: center;
+}
+
+.download-link {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+}

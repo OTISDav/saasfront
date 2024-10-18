@@ -5,9 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Retirer toute propriété de positionnement qui pourrait causer un centrage */
+  position: relative; /* Utilisez relative si nécessaire, mais sans affecter l'alignement */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.dashboard-container {
+  padding: 20px; /* Ajoutez un padding pour espacer le contenu */
+  text-align: left; /* Assurez-vous que le texte est aligné à gauche */
 }
+
+/* Autres styles */
+.dashboard-header {
+  margin-top: 20px; /* Ajustez selon vos besoins */
+  display: flex; /* Pour aligner les éléments horizontalement si nécessaire */
+  align-items: center;
+}
+
+.user-profile {
+  margin: 20px 0;
+  text-align: left; /* Assurez-vous que le texte du profil est aligné à gauche */
+}
+
+/* Ajoutez d'autres classes de style selon vos besoins */

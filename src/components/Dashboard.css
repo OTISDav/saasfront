@@ -1,0 +1,98 @@
+/* Styles globaux */
+/* body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F5F5F5; /* Couleur de fond similaire à ta capture */
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+} */ */
+
+/* Conteneur principal */
+.dashboard {
+  background-color: #F5F5F5;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* En-tête avec le logo et le bouton À propos */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: fixed;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.about-btn {
+  background-color: #5d994d;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.about-btn:hover {
+  background-color: #D0D0D0;
+}
+
+/* Titre principal */
+.main-content h2 {
+  margin-top: 180px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+/* Conteneur des services */
+.services {
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+}
+
+/* Cartes de service */
+.service-card {
+  background-color: #D8D8D8;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+}
+
+.service-icon {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+}
+

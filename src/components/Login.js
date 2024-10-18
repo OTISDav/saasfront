@@ -1,10 +1,10 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { login } from '../api'; // Importez la fonction de connexion
 
 const Login = ({ setToken }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState(''); // Utilisation de nom d'utilisateur
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Pour la navigation
@@ -12,26 +12,25 @@ const Login = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/login/', {
-        email,
-        password,
-      });
-      setToken(response.data.token);
-      localStorage.setItem('token', response.data.token);
+      const response = await login(username, password); // Utilisez la fonction de connexion
+      setToken(response.token); // Assurez-vous que cela correspond à la structure de votre réponse
+      localStorage.setItem('token', response.token);
+      navigate('/dashboard'); // Redirigez vers le Dashboard après une connexion réussie
     } catch (error) {
-      setError('Erreur de connexion. Vérifiez vos identifiants.');
+      console.error('Erreur de connexion:', error);
+      setError('Erreur de connexion. Vérifiez vos identifiants.'); // Message d'erreur
     }
   };
 
   return (
-    <div>
+    <div className="dashboard">
       <h2>Connexion</h2>
       <form onSubmit={handleSubmit}>
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text" // Utilisation de type text pour le nom d'utilisateur
+          placeholder="Nom d'utilisateur"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <input
@@ -43,7 +42,7 @@ const Login = ({ setToken }) => {
         />
         <button type="submit">Se connecter</button>
       </form>
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>} {/* Affiche le message d'erreur */}
       <p>
         Pas de compte ? <button onClick={() => navigate('/register')}>Créer un compte</button>
       </p>

@@ -1,60 +1,86 @@
-// src/api.js
 import axios from 'axios';
 
+// Créez une instance Axios avec les paramètres de base
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Fonction d'authentification
-export const login = async (email, password) => {
-  const response = await api.post('/auth/login/', { email, password });
-  return response.data;
+// Fonction de connexion
+export const login = async (username, password) => {
+  try {
+    const response = await api.post('/accounts/login/', { username, password });
+
+    if (response.status === 200) {
+      const data = response.data;
+      
+      // Stockez le token et les autres infos dans localStorage si nécessaire
+      const tokenData = {
+        token: data.token,
+        user: data.user,
+      };
+      
+      localStorage.setItem('token', JSON.stringify(tokenData)); // Stockez en JSON
+
+      return data;
+    }
+  } catch (error) {
+    console.error('Erreur de connexion:', error.response ? error.response.data : error.message);
+    throw new Error('Erreur de connexion');
+  }
 };
 
-export const register = async (email, password) => {
-  const response = await api.post('/auth/register/', { email, password });
-  return response.data;
+// Fonction d'inscription
+export const register = async (username, email, phoneNumber, password) => {
+  try {
+    const response = await api.post('/accounts/register/', {
+      username,
+      email,
+      phone_number: phoneNumber,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de l'inscription:", error.response ? error.response.data : error.message);
+    throw error;
+  }
 };
 
-// Fonction pour télécharger des vidéos
+// Fonction pour télécharger une vidéo
 export const downloadVideo = async (videoData, token) => {
-  const response = await api.post('/videos/download/', videoData, {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-  return response.data;
+  try {
+    const response = await api.post('/videos/download/', videoData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data; // Retourner les données (lien de téléchargement + titre)
+  } catch (error) {
+    console.error("Erreur lors du téléchargement de la vidéo :", error);
+    throw error;
+  }
 };
 
-// Fonction pour générer un CV
-export const generateCV = async (cvData, token) => {
-  const response = await api.post('/cv/generate/', cvData, {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-  return response.data;
-};
+// Fonction pour récupérer les vidéos de l'utilisateur
+export const getUserVideos = async () => {
+  const tokenData = JSON.parse(localStorage.getItem('token'));
+  const token = tokenData ? tokenData.token : null;
 
-// Récupérer les vidéos de l'utilisateur
-export const getUserVideos = async (token) => {
-  const response = await api.get('/videos/my_videos/', {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-  return response.data;
-};
+  if (!token) {
+    throw new Error("Utilisateur non authentifié");
+  }
 
-// Récupérer les CV de l'utilisateur
-export const getUserCVs = async (token) => {
-  const response = await api.get('/cv/my_cvs/', {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-  return response.data;
+  try {
+    const response = await api.get('/videos/my_videos/', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des vidéos :", error.response ? error.response.data : error);
+    throw error;
+  }
 };
