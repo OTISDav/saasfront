@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './VideoDownloader.css'
-import { downloadVideo } from '../api'; 
-import {FaSyncAlt } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import './VideoDownloader.css';
+import { downloadVideo, getUserVideos } from '../api'; 
+import { FaSyncAlt } from 'react-icons/fa';
 
 const VideoDownloader = () => {
   const [videoURL, setVideoURL] = useState('');
@@ -10,8 +10,8 @@ const VideoDownloader = () => {
   const [downloadLink, setDownloadLink] = useState(null);
   const [videoTitle, setVideoTitle] = useState('');
   const token = localStorage.getItem('token');
+  const [userVideo, setUserVideo] = useState([]);
 
-  // Fonction pour gérer la soumission de l'URL
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -30,9 +30,21 @@ const VideoDownloader = () => {
     }
   };
 
+  const _getUserVideos = async () => {
+    try {
+      const response = await getUserVideos(token);
+      setUserVideo(response);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    _getUserVideos();
+  }, [token]);
+
   return (
     <div className="video-downloader-container">
-      {/* En-tête avec le logo, A propos et l'icône utilisateur */}
       <header className="header">
         <div className="header-left">
           <img src="/image/logo.png" alt="OtisSaas Logo" className="logo" />
@@ -43,11 +55,10 @@ const VideoDownloader = () => {
         </div>
       </header>
 
-      <div className="content">
-        {/* Titre principal */}
+
+      <div className='mm'>
         <h2 className="page-title">Télécharger des vidéos YouTube</h2>
 
-        {/* Formulaire pour entrer l'URL */}
         <form onSubmit={handleSubmit} className="download-form">
           <div className="input-container">
             <input
@@ -70,18 +81,38 @@ const VideoDownloader = () => {
         {downloadLink && (
           <div className="download-link-container">
             <p className="success-message">Vidéo prête à être téléchargée : {videoTitle}</p>
+            <p className="success-message">Votre video sera sauvegardee dans "Téléchargements\OtisTelechargement"</p>
             <a href={downloadLink} download className="download-link">
               Cliquez ici pour télécharger
             </a>
           </div>
         )}
 
-        {/* Ligne séparatrice */}
         <hr className="separator" />
-
-        {/* Liste des vidéos téléchargées */}
-        <p className="downloaded-list-title">Liste des vidéos téléchargées</p>
       </div>
+
+        <p className="downloaded-list-title">Liste de vos vidéos téléchargées</p><br/>
+
+        <div className="container mt-3">       
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Youtube chanelle</th>
+                <th>Title</th>
+                <th>Upload date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userVideo.map((video) => (
+                <tr key={video.id}>
+                  <td>{video.uploader}</td>
+                  <td>{video.title}</td>
+                  <td>{video.created_at}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
     </div>
   );
 };

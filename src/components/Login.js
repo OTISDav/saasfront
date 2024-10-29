@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api'; // Importez la fonction de connexion
+import './login.css'
 
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState(''); // Utilisation de nom d'utilisateur
@@ -13,8 +14,11 @@ const Login = ({ setToken }) => {
     e.preventDefault();
     try {
       const response = await login(username, password); // Utilisez la fonction de connexion
-      setToken(response.token); // Assurez-vous que cela correspond à la structure de votre réponse
-      localStorage.setItem('token', response.token);
+      setToken( response.token);
+      console.log(response.tokens.access);
+      
+      // Assurez-vous que cela correspond à la structure de votre réponse
+      localStorage.setItem('token', response.tokens.access);
       navigate('/dashboard'); // Redirigez vers le Dashboard après une connexion réussie
     } catch (error) {
       console.error('Erreur de connexion:', error);
@@ -23,8 +27,10 @@ const Login = ({ setToken }) => {
   };
 
   return (
+    <div className='rrt'>
     <div className="dashboard">
       <h2>Connexion</h2>
+      <div className='form'>
       <form onSubmit={handleSubmit}>
         <input
           type="text" // Utilisation de type text pour le nom d'utilisateur
@@ -42,10 +48,12 @@ const Login = ({ setToken }) => {
         />
         <button type="submit">Se connecter</button>
       </form>
+      </div>
       {error && <p>{error}</p>} {/* Affiche le message d'erreur */}
       <p>
         Pas de compte ? <button onClick={() => navigate('/register')}>Créer un compte</button>
       </p>
+    </div>
     </div>
   );
 };

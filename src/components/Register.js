@@ -1,6 +1,8 @@
 // src/components/Register.js
 import React, { useState } from 'react';
 import { register } from '../api';
+import './login.css'
+
 
 
 const Register = () => {

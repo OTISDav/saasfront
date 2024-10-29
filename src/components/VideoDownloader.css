@@ -7,10 +7,9 @@
     font-family: Arial, sans-serif;
     background-color: #f6f1f4;
     height: 100vh;
-    position: fixed;
-    top: 0;
-    width: 100%; /* Assure que le conteneur prend toute la largeur */
-    z-index: 1000; /* Assure que la barre est visible au-dessus des autres éléments */
+    position: relative;
+    width: 100%; 
+    z-index: 1000; 
 }
 
 .header {
@@ -19,9 +18,9 @@
     width: 100%;
     padding: 10px 20px;
     background-color: #f5f5f5;
-    position: fixed; /* Correction: pas de guillemets */
+    position: fixed; 
     top: 0;
-    z-index: 1000; /* Garde la barre visible au-dessus des autres éléments */
+    z-index: 1000; 
 }
 
 .header-left {
@@ -45,45 +44,53 @@
     border-radius: 15px;
     padding: 5px 10px;
     cursor: pointer;
-    margin-right: 50px; /* Ajoute un espacement à droite pour l'éloigner des bords */
-    margin-left: auto; /* S'assure que le bouton soit aligné à droite */
+    margin-right: 50px; 
+    margin-left: auto; 
+    transition: background-color 0.3s; /* Ajoute une transition douce */
 }
 
+.about-btn:hover {
+    background-color: #2b6c20; /* Changement de couleur au survol */
+}
 
 .page-title {
-    font-size: 24px;
+    font-size: 70px;
+    text-align: center;
     margin: 20px 0;
 }
 
 .download-form {
     display: flex;
     justify-content: center;
-    margin-top: 50px; /* Ajoute un espace sous la barre fixe */
+    margin-top: 50px; 
 }
+
 
 .input-container {
     display: flex;
+    justify-content: center;
     align-items: center;
     background-color: #e0d4d4;
     padding: 8px;
-    border-radius: 5px;
-}
-
-.form-input {
+    border-radius: 10px;
     border: none;
-    padding: 10px;
-    font-size: 16px;
-    flex: 1;
-    background-color: #eae5e5;
-    margin-right: 10px;
+    font-size: 2px;
+}
+.form-input{
+    width: 300px;
 }
 
 .download-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: transform 0.3s; /* Ajoute une transition pour l'effet de clic */
+    width: 50px;
 }
 
+.download-button:hover {
+    transform: scale(1.1); /* Agrandissement léger au survol */
+}
 
 .separator {
     width: 100%;

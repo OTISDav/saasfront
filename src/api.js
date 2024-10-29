@@ -64,13 +64,13 @@ export const downloadVideo = async (videoData, token) => {
 };
 
 // Fonction pour récupérer les vidéos de l'utilisateur
-export const getUserVideos = async () => {
-  const tokenData = JSON.parse(localStorage.getItem('token'));
-  const token = tokenData ? tokenData.token : null;
+export const getUserVideos = async (token) => {
+  // const tokenData = localStorage.getItem('token');
+  // const token = tokenData ? tokenData : null;
 
-  if (!token) {
-    throw new Error("Utilisateur non authentifié");
-  }
+  // if (!token) {
+  //   throw new Error("Utilisateur non authentifié");
+  // }
 
   try {
     const response = await api.get('/videos/my_videos/', {
