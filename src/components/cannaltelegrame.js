@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getCanal } from '../api'; // Importer la fonction getcanal de api.js
+import './CanalTelegrame.css';
 
 const CanalTelegrame = () => {
   const [canaux, setCanaux] = useState([]);
@@ -32,23 +33,35 @@ const CanalTelegrame = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
-      <h1>Liste des canaux</h1>
+    <div className="canaux-container">
+      <header className="header">
+        <div className="header-left">
+          <img src="/image/logo.png" alt="OtisSaas Logo" className="logo" />
+          <h1>OtisSaas</h1>
+        </div>
+        <div className="header-right">
+          <button className="about-btn">A propos</button>
+        </div>
+      </header> <br/>
+
+      <br/><h1>Liste des canaux</h1>
       {canaux.length === 0 ? (
         <p>Aucun canal trouvé.</p>
       ) : (
-        <ul>
+        <div className="cards-container">
           {canaux.map((canal) => (
-            <li key={canal.id}>
-              <strong>{canal.nom}</strong>
-              <p>{canal.description}</p>
-              <p>Prix: {canal.prix}€</p>
-              <p>Date de création: {new Date(canal.date_creation).toLocaleString()}</p>
-              <p>Est vendu: {canal.est_vendu ? "Oui" : "Non"}</p>
-              <p>Propriétaire: {canal.proprietaire_nom}</p> {/* Affichage du nom du propriétaire */}
-            </li>
+            <div className="card" key={canal.id}>
+              <div className="card-content">
+                <h2>{canal.nom}</h2>
+                <p><strong>Propriétaire:</strong> {canal.proprietaire_nom}</p>
+                <p><strong>Description:</strong> {canal.description}</p>
+                <p><strong>Prix:</strong> {canal.prix}€</p>
+                {/* <p><strong>Date de création:</strong> {new Date(canal.date_creation).toLocaleString()}</p> */}
+                <p><strong>Vendu:</strong> {canal.est_vendu ? "Oui" : "Non"}</p>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

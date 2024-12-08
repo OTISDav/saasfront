@@ -1,0 +1,68 @@
+/* Style du container des cartes */
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    position: fixed; 
+    top: 20;
+    z-index: 1000; 
+}
+.canaux-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Conteneur global des cartes */
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Style de chaque carte */
+  .card {
+    background-color: #a7d0cb;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Animation au survol de la carte */
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style du contenu de la carte */
+  .card-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Titre de la carte */
+  .card h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Texte des paragraphes */
+  .card p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  /* Style pour les titres des sections */
+  .card strong {
+    color: #007BFF;
+  }
+  
+  /* Un petit effet sur le titre au survol */
+  .card h2:hover {
+    color: #007BFF;
+  }
+  
