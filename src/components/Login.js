@@ -27,7 +27,6 @@ const Login = ({ setToken }) => {
   };
 
   return (
-    <div className='rrt'>
     <div className="dashboard">
       <h2>Connexion</h2>
       <div className='form'>
@@ -53,7 +52,6 @@ const Login = ({ setToken }) => {
       <p>
         Pas de compte ? <button onClick={() => navigate('/register')}>Créer un compte</button>
       </p>
-    </div>
     </div>
   );
 };

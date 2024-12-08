@@ -65,12 +65,6 @@ export const downloadVideo = async (videoData, token) => {
 
 // Fonction pour récupérer les vidéos de l'utilisateur
 export const getUserVideos = async (token) => {
-  // const tokenData = localStorage.getItem('token');
-  // const token = tokenData ? tokenData : null;
-
-  // if (!token) {
-  //   throw new Error("Utilisateur non authentifié");
-  // }
 
   try {
     const response = await api.get('/videos/my_videos/', {
@@ -84,3 +78,20 @@ export const getUserVideos = async (token) => {
     throw error;
   }
 };
+
+
+// Fonction pour recuperer les cannaux
+export const getCanal = async (token) => {
+  try {
+    const response = await api.get('/cannal/canaux/', {
+      headers: {
+        'Authorization': `Bearer ${token}`, // Ajouter le token JWT dans les headers
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des canaux :", error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+

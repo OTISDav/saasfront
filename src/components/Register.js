@@ -1,7 +1,8 @@
 // src/components/Register.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { register } from '../api';
-import './login.css'
+import './register.css'
 
 
 
@@ -10,6 +11,8 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Pour la navigation
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,38 +27,45 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Inscription</h2>
-      <input
-        type="text"
-        placeholder="Nom d'utilisateur"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Numéro de téléphone"
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">S'inscrire</button>
-    </form>
+    <div className='Body'>
+      <div className='Dasboard'>
+      <form onSubmit={handleSubmit}>
+        <h2>Inscription</h2>
+        <input
+          type="text"
+          placeholder="Nom d'utilisateur"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Numéro de téléphone"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">S'inscrire</button>
+      </form>
+      <p>
+        Retournez a la page de connexion <button onClick={() => navigate('/')}>Se connecter</button>
+      </p>
+      </div>
+    </div>
   );
 };
 

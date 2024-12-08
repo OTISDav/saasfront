@@ -39,6 +39,13 @@ const VideoDownloader = () => {
     }
   };
 
+  // Appeler _getUserVideos après chaque nouveau téléchargement
+  useEffect(() => {
+    if (downloadLink) {
+      _getUserVideos();
+    }
+  }, [downloadLink]); // Exécute cet effet chaque fois que downloadLink change
+
   useEffect(() => {
     _getUserVideos();
   }, [token]);
@@ -55,7 +62,6 @@ const VideoDownloader = () => {
         </div>
       </header>
 
-
       <div className='mm'>
         <h2 className="page-title">Télécharger des vidéos YouTube</h2>
 
@@ -71,7 +77,7 @@ const VideoDownloader = () => {
               required
             />
             <button type="submit" className="download-button" disabled={isLoading}>
-              <FaSyncAlt className="sync-icon" />
+              {isLoading ? 'Chargement...' : <FaSyncAlt className="sync-icon" />}
             </button>
           </div>
         </form>
@@ -81,8 +87,13 @@ const VideoDownloader = () => {
         {downloadLink && (
           <div className="download-link-container">
             <p className="success-message">Vidéo prête à être téléchargée : {videoTitle}</p>
-            <p className="success-message">Votre video sera sauvegardee dans "Téléchargements\OtisTelechargement"</p>
-            <a href={downloadLink} download className="download-link">
+            <p className="success-message">Votre video sera sauvegardee dans "Téléchargements\OtisSaasTelechargement"</p>
+            <a 
+              href={downloadLink} 
+              download 
+              target="_blank"
+              className="download-link"
+            >
               Cliquez ici pour télécharger
             </a>
           </div>
@@ -93,26 +104,28 @@ const VideoDownloader = () => {
 
         <p className="downloaded-list-title">Liste de vos vidéos téléchargées</p><br/>
 
-        <div className="container mt-3">       
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Youtube chanelle</th>
-                <th>Title</th>
-                <th>Upload date</th>
+      <div className="container mt-3">       
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Youtube chanelle</th>
+              <th>Title</th>
+              <th>Upload date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userVideo.map((video) => (
+              <tr key={video.id} className="video-row">
+                <td style={{ borderRight: '10px solid #ddd' }}>{video.uploader}</td>
+                <td style={{ borderRight: '10px solid #ddd' }}>{video.title}</td>
+                <td>{video.created_at}</td>
               </tr>
-            </thead>
-            <tbody>
-              {userVideo.map((video) => (
-                <tr key={video.id}>
-                  <td>{video.uploader}</td>
-                  <td>{video.title}</td>
-                  <td>{video.created_at}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+
     </div>
   );
 };

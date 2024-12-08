@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
+import CanalListPage from './components/cannaltelegrame';
 import VideoDownloader from './components/VideoDownloader';
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/" element={<Login setToken={setToken} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/video-downloader" element={<VideoDownloader token={token} />} />
+        <Route path="/liste-cannaux" element={<CanalListPage token={token} />} />
         <Route path="/dashboard" element={<Dashboard token={token} />} /> {/* Modifiez ici */}
       </Routes>
     </Router>

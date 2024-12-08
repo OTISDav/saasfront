@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f5f5f5; /* Couleur de fond pour le dashboard */
+    background-color: #f5f5f5; 
   }
   h2{
     text-align: center;
@@ -12,24 +12,29 @@
   }
   
   .form {
-    width: 100%;
-    max-width: 400px; /* Limite la largeur du formulaire */
-    padding: 2rem;
+    /* width: 100%;
+    max-width: 400px;  */  
+    /* padding: 2rem;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5; 
   }
   
-  form input {
+  /* form input {
     width: 100%;
     padding: 0.75rem;
-    margin-bottom: 1rem;
+    margin-bottom: rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
   }
-  
+   */
   form button {
     width: 100%;
     padding: 0.75rem;
